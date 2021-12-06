@@ -2,8 +2,33 @@ import { Button, Col, Form, Input, Modal, Row, Select } from 'antd';
 import React, { useState } from 'react';
 import NewPatientForm from './NewPatientForm';
 
+const dummypatient = [
+    {
+        id: 1,
+        name: 'Jack',
+        phone: '0987654321',
+        address: 'Insein'
+    },
+    {
+        id: 2,
+        name: 'Lucy',
+        phone: '091234567890',
+        address: 'Mingaladon'
+    }
+]
+
 function PatientInfo(){
     const [showNewPatientForm, setShowNewPatientForm] = useState(false)
+
+    const [form] = Form.useForm()
+
+    const handleSelect = (val:any, option:any) => {
+        const pat = dummypatient.filter(x=>x.id===val)[0]
+        form.setFieldsValue({
+            phone: pat.phone,
+            address: pat.address
+        })
+    }
     return(
         <div style={{margin: '1rem'}}>
             <h1>Patient Info</h1>
@@ -12,6 +37,7 @@ function PatientInfo(){
                 layout="vertical"
                 initialValues={{ remember: true }}
                 autoComplete="off"
+                form={form}
             >
                 <Row gutter={18}>
                     <Col span={12}>
@@ -24,6 +50,7 @@ function PatientInfo(){
                                 bordered={false} 
                                 className="patient-input" 
                                 showSearch
+                                onSelect={handleSelect}
                                 filterOption={(input, option) =>
                                     option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                 }
@@ -34,9 +61,8 @@ function PatientInfo(){
                                     </React.Fragment>
                                   )}
                             >
-                                    <Select.Option value={1}>Jack</Select.Option>
-                                    <Select.Option value={2}>Lucy</Select.Option>
-                                    <Select.Option value={3}>Tom</Select.Option>
+                                {dummypatient.map(x=><Select.Option key={x.id} value={x.id}>{x.name}</Select.Option>)}
+
                             </Select>
                         </Form.Item>
                     </Col>
@@ -58,7 +84,7 @@ function PatientInfo(){
                             label="Phone"
                             name="phone"
                         >
-                            <Input disabled bordered={false} className="patient-input"/>
+                            <Input style={{color: 'black'}} disabled bordered={false} className="patient-input"/>
                         </Form.Item>
                     </Col>
                     <Col span={12}>
@@ -66,7 +92,7 @@ function PatientInfo(){
                             label="Address"
                             name="address"
                         >
-                            <Input disabled bordered={false} className="patient-input"/>
+                            <Input style={{color: 'black'}} disabled bordered={false} className="patient-input"/>
                         </Form.Item>
                     </Col>
                 </Row>
