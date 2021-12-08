@@ -69,9 +69,9 @@ function PatientInfo(){
 
                      <Col span={12}>
                         <Form.Item
-                            label="Patient Reg"
-                            name="reg"
-                            rules={[{ required: true, message: "Please input patient's reg no" }]}
+                            label="Patient ID"
+                            name="patient_id"
+                            rules={[{ required: true, message: "Please input patient's ID" }]}
                         >
                             <Input bordered={false} className="patient-input" placeholder="[dev note] this field will be removed if master patient index was not used"/>
                         </Form.Item>
@@ -97,7 +97,7 @@ function PatientInfo(){
                     </Col>
                 </Row>
             </Form>
-            <Modal title="Basic Modal" visible={showNewPatientForm} onCancel={()=>setShowNewPatientForm(false)} footer="">
+            <Modal title="Register Patient" visible={showNewPatientForm} onCancel={()=>setShowNewPatientForm(false)} footer="">
                 <NewPatientForm/>
             </Modal>
         </div>

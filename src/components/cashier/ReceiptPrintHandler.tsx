@@ -47,6 +47,7 @@ function ReceiptPrintHandler({toogle,data}:Props){
     return(
         <React.Fragment>
             <Space>
+                <Button type='primary'>Pay</Button>
                 <Button type="primary" onClick={handlePrint}>Print</Button>
                 <Button onClick={toogle}>Back</Button>
             </Space>

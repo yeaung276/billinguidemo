@@ -26,19 +26,19 @@ function BillItemTable({data,onRemove}:Props){
             key: 'ind'
         },
         {
-          title: 'Name',
-          dataIndex: 'sales_service_item_name',
-          key: 'name',
+            title: 'Name',
+            dataIndex: 'sales_service_item_name',
+            key: 'name',
         },
         {
-          title: 'Charge',
-          dataIndex: 'charge',
-          key: 'charge',
+            title: 'Charge',
+            dataIndex: 'charge',
+            key: 'charge',
         },
         {
-          title: 'Quantity',
-          dataIndex: 'quantity',
-          key: 'quantity',
+            title: 'Quantity',
+            dataIndex: 'quantity',
+            key: 'quantity',
         },
         {
             title: 'Unit',

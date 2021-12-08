@@ -1,7 +1,7 @@
-import { Button, Col, Form, Input, Row } from 'antd';
+import { Button, Col, Form, Input, Row, Select } from 'antd';
 import React from 'react';
 
-function NewPatientForm(){
+function NewItemForm(){
     return (
         <React.Fragment>
             <Form
@@ -13,9 +13,9 @@ function NewPatientForm(){
                 <Row gutter={18}>
                     <Col span={12}>
                         <Form.Item
-                            label="Patient Name"
-                            name="patient_id"
-                            rules={[{ required: true, message: "Please input patient's name" }]}
+                            label="Name"
+                            name="name"
+                            rules={[{ required: true, message: "Please input item's name" }]}
                         >
                            <Input bordered={false} className="patient-input"/>
                         </Form.Item>
@@ -23,9 +23,9 @@ function NewPatientForm(){
 
                      <Col span={12}>
                         <Form.Item
-                            label="Patient Reg"
-                            name="patient_id"
-                            rules={[{ required: true, message: "Please input patient's ID" }]}
+                            label="Price"
+                            name="price"
+                            rules={[{ required: true, message: "Please input price" }]}
                         >
                             <Input bordered={false} className="patient-input"/>
                         </Form.Item>
@@ -35,18 +35,22 @@ function NewPatientForm(){
                 <Row gutter={18}>
                     <Col span={12}>
                         <Form.Item
-                            label="Phone"
-                            name="phone"
+                            label="UOM"
+                            name="uom_id"
                         >
-                            <Input bordered={false} className="patient-input"/>
+                            <Select bordered={false} className="patient-input">
+                                <Select.Option value={1}>Pcs</Select.Option>
+                            </Select>
                         </Form.Item>
                     </Col>
                     <Col span={12}>
                         <Form.Item
-                            label="Address"
-                            name="address"
+                            label="Category"
+                            name="category_id"
                         >
-                            <Input bordered={false} className="patient-input"/>
+                            <Select bordered={false} className="patient-input">
+                                <Select.Option value={1}>Pharmacy</Select.Option>
+                            </Select>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -58,4 +62,4 @@ function NewPatientForm(){
     )
 }
 
-export default NewPatientForm;
+export default NewItemForm;

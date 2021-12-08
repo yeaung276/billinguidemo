@@ -1,17 +1,15 @@
-import { Space, Table, Tabs, Button } from 'antd';
+import { Table, Tabs, Button } from 'antd';
 import React, { useState } from 'react';
-import BillForm from './BillForm';
+import HeaderBar from '../components/cashier/HeaderBar';
 
-import Receipt from '../../components/cashier/ReceiptPrintHandler';
-import HeaderBar from '../../components/cashier/HeaderBar';
+import Receipt from '../components/cashier/ReceiptPrintHandler';
 
-function Cashier(){
+function Payment(){
     enum Show {
         receipt,
-        form,
         table
     }
-    const [showForm, setShowForm] = useState<Show>(Show.form)
+    const [showForm, setShowForm] = useState<Show>(Show.table)
 
 const columns = [
     {
@@ -40,28 +38,20 @@ const columns = [
         key: 'total_amount',
     }
 ]
-    if(showForm===Show.form) return <BillForm toogle={()=>setShowForm(Show.table)}/>
 
     if(showForm===Show.receipt) return <Receipt toogle={()=>setShowForm(Show.table)} data={[]}/>
 
     return(
         <React.Fragment>
-            <HeaderBar
-                buttons={
-                    <Space>
-                        <Button type="primary" onClick={()=>setShowForm(Show.form)}>New</Button>
-                        <Button type="primary" onClick={()=>setShowForm(Show.form)}>Edit</Button>
-                        <Button type="primary" onClick={()=>setShowForm(Show.receipt)}>Detail</Button>
-                    </Space>
-                }
-                title="Cashier"
-            />
-                
+
+            <HeaderBar title="Payment"/>
             <Tabs defaultActiveKey="1">
-                <Tabs.TabPane tab="Drafted" key="1">
+                <Tabs.TabPane tab="Outstanding" key="1">
+                    <Button type="primary" onClick={()=>setShowForm(Show.receipt)}>Make Payment</Button>
                     <Table columns={columns} dataSource={[]} />
                 </Tabs.TabPane>
-                <Tabs.TabPane tab="Printed" key="2">
+                <Tabs.TabPane tab="Complete" key="2">
+                    <Button type="primary" onClick={()=>setShowForm(Show.receipt)}>Detail</Button>
                     <Table columns={columns} dataSource={[]} />
                 </Tabs.TabPane>
             </Tabs>
@@ -69,4 +59,4 @@ const columns = [
     )
 }
 
-export default Cashier;
+export default Payment;

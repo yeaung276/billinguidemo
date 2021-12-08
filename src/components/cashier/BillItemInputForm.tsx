@@ -1,7 +1,8 @@
-import { Form, Button, Select, InputNumber } from 'antd';
+import { Form, Button, Select, InputNumber, Modal } from 'antd';
 import { RefSelectProps } from 'rc-select';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { RowItem } from './BillItemTable';
+import NewItemForm from './NewItemForm';
 
 type Prop = {
     onSubmit: (item:RowItem) => void
@@ -18,6 +19,8 @@ function BillItemInputForm({onSubmit}:Prop){
     const [form] = Form.useForm()
     const selectRef = useRef<RefSelectProps>() as React.MutableRefObject<RefSelectProps>
     const quantityRef = useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>
+
+    const [showNewItemForm, setShowNewItemForm] = useState(false)
 
     const handleSubmit = () => {
         const data = form.getFieldsValue()
@@ -61,6 +64,12 @@ function BillItemInputForm({onSubmit}:Prop){
                         optionFilterProp="children"
                         filterOption={(input, option) => option!.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                         ref={selectRef}
+                        dropdownRender={menu => (
+                            <React.Fragment>
+                                {menu}
+                                <Button type='primary' block onClick={()=>setShowNewItemForm(true)}>Add New Sale/Service Item</Button>
+                            </React.Fragment>
+                          )}
                     >
                         <Option value={1}>Dr. Moe Moe - Opd charge</Option>
                         <Option value={2}>Urine REME</Option>
@@ -81,7 +90,9 @@ function BillItemInputForm({onSubmit}:Prop){
                 </Form.Item>
             </Form>
         </div>
-       
+        <Modal title="Add New Sale/Service Item" visible={showNewItemForm} onCancel={()=>setShowNewItemForm(false)} footer="">
+            <NewItemForm/>
+        </Modal>
         </React.Fragment>
     )
 }

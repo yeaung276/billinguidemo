@@ -29,7 +29,8 @@ function Cashier(){
     const navigate = useNavigate()
     return(
         <Menu mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<UserOutlined />} onClick={()=>navigate('/dashboard/cashier/bills')}>Bills</Menu.Item>
+            <Menu.Item key="1" icon={<UserOutlined />} onClick={()=>navigate('/cashier')}>Bills</Menu.Item>
+            <Menu.Item key="2" icon={<UserOutlined />} onClick={()=>navigate('/payment')}>Payments</Menu.Item>
         </Menu>
     )
 }
